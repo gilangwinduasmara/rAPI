@@ -1,0 +1,207 @@
+{
+    "host": "http://192.168.137.23/UKIT/Admisi",
+    "models": [
+        {
+            "provinsi": {
+                "id": "integer",
+                "provinsi": "strings"
+            }
+        },
+        {
+            "kota": {
+                "id": "integer",
+                "kota_kab": "strings",
+                "provinsi_id": "integer"
+            }
+        },
+        {
+            "kelurahan": {
+                "id": "integer",
+                "kelurahan": "strings"
+            }
+        },
+        {
+            "sekolah": {
+                "id": "integer",
+                "alamat": "strings",
+                "kota_id": "integer"
+            }
+        },
+        {
+            "pendaftaran":{
+                "id": "integer",
+                "jalur_pendaftaran_id": "integer",
+                "tahun_akademik_id": "integer",
+                "jenjang_id": "integer",
+                "status_formulir": "enum(AKTIF,TIDAK AKTIF)",
+                "NISN": "strings",
+                "NIK": "strings",
+                "nama": "strings",
+                "email": "strings",
+                "no_hp": "strings",
+                "kota_kelahiran": "strings",
+                "tgl_lahir": "strings",
+                "jenis_kelamin": "strings",
+                "agama": "strings",
+                "akun_id": "strings",
+                "created_at": "strings",
+                "pekerjaan": "strings",
+                "status_sipil": "strings",
+                "gol_darah": "enum(A,B,AB,O,-)",
+                "berat_badan": "double",
+                "tinggi_badan": "double",
+                "kewarganegaraan": "enum(WNA,WNI)",
+                "alamat_asal": "strings",
+                "prodi_id_1": "integer",
+                "prodi_id_2": "integer",
+                "kelurahan_id": "integer",
+                "upload_foto": "strings",
+                "upload_kk": "strings",
+                "upload_akta_lahir": "strings",
+                "upload_srt_pernyataan": "strings",
+                "negara": "strings"
+            }
+        },
+        {
+            "registrasi_ulang":{
+                "id": "integer",
+                "hasil_penerimaan_id": "integer",
+                "nama_camaru": "string",
+                "upload_bukti_bayar": "string",
+                "nim": "string",
+                "prodi_id": "string",
+                "status": "string"
+            }
+        },
+        {
+            "hasil_penerimaan":{
+                "id": "integer",
+                "pendaftaran_id": "integer",
+                "prodi_id": "integer",
+                "kode_skpm": "string",
+                "upload_skpm": "string",
+                "status": "string",
+                "created_at": "string"
+            }
+        },
+        {
+            "jenjang": {
+                "id": "integer",
+                "jalur_pendaftaran_id": "integer",
+                "tahun_akademik_id": "integer",
+                "jenjang_id": "integer",
+                "status_formulir": "strings",
+                "NISN": "strings",
+                "NIK": "strings",
+                "nama": "strings",
+                "email": "strings",
+                "no_hp": "strings",
+                "kota_kelahiran": "strings",
+                "tgl_lahir": "strings",
+                "jenis_kelamin": "strings",
+                "agama": "strings",
+                "akun_id": "integer",
+                "created_at": "strings",
+                "pekerjaan": "strings",
+                "status_sipil": "strings",
+                "gol_darah": "strings",
+                "berat_badan": "strings",
+                "tinggi_badan": "strings",
+                "kewarganegaraan": "strings",
+                "alamat_asal": "strings",
+                "prodi_1_id": "integer",
+                "prodi_2_id": "integer",
+                "kelurahan_id": "integer",
+                "upload_foto": "strings",
+                "upload_kk": "strings",
+                "upload_akta_lahir": "strings",
+                "upload_srt_pernyataan": "strings",
+                "negara": "strings"
+            }
+        }
+    ],
+    "resources": [
+        {
+            "name": "registrasi_ulang",
+            "label": "Registrasi Ulang",
+            "endpoints": [
+                {
+                    "url": "/service/api/registrasi_ulang",
+                    "method": "GET",
+                    "desc": "Get all data"
+                },
+                {
+                    "url": "/service/api/registrasi_ulang/{id}",
+                    "method": "GET",
+                    "desc": "Find data by id",
+                    "url_params": {
+                        "id": "integer"
+                    }
+                },
+                {
+                    "url": "/service/api/registrasi_ulang/status/{status}",
+                    "method": "GET",
+                    "desc": "Find data by status",
+                    "url_params": {
+                        "status": "enum(BELUM BAYAR, VALIDASI KEUANGAN, VALIDASI NIM, LUNAS)"
+                    }
+                },
+                {
+                    "url": "/service/api/registrasi_ulang",
+                    "method": "POST",
+                    "desc": "Create new data"
+                },
+                {
+                    "url": "/service/api/registrasi_ulang/{id}",
+                    "method": "PUT",
+                    "desc": "Update data",
+                    "url_params": {
+                        "id": "integer"
+                    },
+                    "body": "!#models.registrasi_ulang"
+                    
+                }
+            ]
+        },
+        {
+            "name": "provinsi",
+            "endpoints": [
+                {
+                    "url": "/service/api/provinsi",
+                    "method": "GET",
+                    "desc": "Get all data"
+                },
+                {
+                    "url": "/service/api/provinsi/{id}",
+                    "method": "GET",
+                    "desc": "Find data by id",
+                    "url_params": {
+                        "id": "integer"
+                    },
+                    "body": {
+                        "example_param": "strings"
+                    }
+                },
+                {
+                    "url": "/service/api/provinsi",
+                    "method": "POST",
+                    "desc": "Create new data"
+                },
+                {
+                    "url": "/service/api/provinsi/1",
+                    "method": "PUT",
+                    "desc": "Update new data"
+                }
+            ]
+        },
+        {
+            "name": "kota"
+        },
+        {
+            "name": "kecamatan"
+        },
+        {
+            "name": "daerah"
+        }
+    ]
+}
