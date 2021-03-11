@@ -14,6 +14,7 @@ function App() {
   const [selectedEndpoint, setSelectedEndpoint] = useState(null)
   const [isFetching, setFetching] = useState(false)
   const [responseBody, setResponseBody] = useState(null)
+  const [body, setBody] = useState(null)
 
   const onResourceItemClick = (resourceName) => {
     const resource = data.resources.filter((item) => (item.name==resourceName))[0]
@@ -26,6 +27,11 @@ function App() {
   const onEndpointClick = (endpoint) => {
     console.log(endpoint)
     setSelectedEndpoint(endpoint)
+    setBody(checkField(JSON.stringify(endpoint?.body?endpoint.body : {})))
+  }
+
+  const onBodyInputChange = (evt) => {
+    setBody(evt.target.value)
   }
 
   const onButtonSubmit = () => {
@@ -40,6 +46,10 @@ function App() {
 
     const request = {
       method: selectedEndpoint.method,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     }
     if(selectedEndpoint.method != "GET"){
       request["body"] = document.getElementsByName('body')[0].value
@@ -58,11 +68,12 @@ function App() {
   }
 
   const checkField = (field="") => {
+    console.log('check field', field)
     if(field.startsWith('"!#')){
       field = field.replaceAll('!#', '')
       field = field.replaceAll('"', '')
       let tree = field.split(".")
-      const model = data[tree[0]].filter((obj, i)=>(Object.keys(obj)[0] == tree[1]))[0]
+      const model = data[tree[0]].filter((obj, i)=>(Object.keys(obj)[0] == tree[1]))[0][tree[1]]
       return JSON.stringify(model, null, 2)
     }else{
       return field
@@ -129,7 +140,7 @@ function App() {
                             selectedEndpoint.body ? 
                                 <Form.Group>
                                   <Form.Label>Body</Form.Label>
-                                  <Form.Control className="bg-dark text-light" as="textarea" rows="3" name="body" value={checkField(JSON.stringify(selectedEndpoint.body))}/>
+                                  <Form.Control onChange={onBodyInputChange} className="bg-dark text-light" as="textarea" rows="3" name="body" value={body}/>
                               </Form.Group>
                 
                             :<div>No Param</div>

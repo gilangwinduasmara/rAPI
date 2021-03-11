@@ -159,7 +159,6 @@
                         "id": "integer"
                     },
                     "body": "!#models.registrasi_ulang"
-                    
                 }
             ]
         },
